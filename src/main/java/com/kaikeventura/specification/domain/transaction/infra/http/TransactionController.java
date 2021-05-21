@@ -4,6 +4,8 @@ import com.kaikeventura.specification.domain.transaction.infra.dto.EcommerceDTO;
 import com.kaikeventura.specification.domain.transaction.infra.dto.TransactionDTO;
 import com.kaikeventura.specification.domain.transaction.service.TransactionService;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,8 @@ public class TransactionController {
             @RequestParam(name = "ecommerceCnpj", required = false) final String ecommerceCnpj,
             @RequestParam(name = "ecommerceName", required = false) final String ecommerce,
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "limit", required = false, defaultValue = "5") int limit
+            @RequestParam(name = "limit", required = false, defaultValue = "5") int limit,
+            @SortDefault(value = "order", sort = "createdAt") Sort order
     ) {
         var transactionQueryParams = new TransactionDTO(
                 authCode,
@@ -40,7 +43,7 @@ public class TransactionController {
                         ecommerce
                 )
         );
-        var pageable = PageRequest.of(page, limit);
+        var pageable = PageRequest.of(page, limit, order);
 
         return ResponseEntity.ok(transactionService.fetchTransactions(transactionQueryParams, pageable));
     }

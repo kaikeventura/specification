@@ -3,6 +3,7 @@ package com.kaikeventura.specification.domain.transaction.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class Transaction implements Serializable {
@@ -19,6 +20,8 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "ecommerce_id", nullable = false)
     private Ecommerce ecommerce;
 
+    private LocalDateTime createdAt;
+
     public Transaction() {
     }
 
@@ -26,6 +29,7 @@ public class Transaction implements Serializable {
         this.authCode = authCode;
         this.value = value;
         this.ecommerce = ecommerce;
+        this.createdAt = LocalDateTime.now();
     }
 
     public String getAuthCode() {
@@ -40,4 +44,7 @@ public class Transaction implements Serializable {
         return ecommerce;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }
