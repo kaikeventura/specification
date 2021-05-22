@@ -18,7 +18,7 @@ public final class TransactionSpecification implements Specification<Transaction
     private static final String VALUE_FIELD = "value";
     private static final String ECOMMERCE_FIELD = "ecommerce";
     private static final String CNPJ_FIELD = "cnpj";
-    private static final String NAME_FIELD = "NAME";
+    private static final String NAME_FIELD = "name";
 
     private final transient TransactionDTO queryParams;
     private final transient List<Predicate> predicates;
